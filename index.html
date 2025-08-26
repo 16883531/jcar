@@ -14,30 +14,25 @@
     html, body {
       width: 100%;
       height: 100%;
-      background: #fff; /* 흰색 배경 */
+      background: #000;
+      overflow: hidden;
     }
 
     .image-wrap {
       position: relative;
       width: 100%;
-      height: 100vh;
+      height: 100dvh; /* 최신 브라우저에서 동작: 모바일 주소창 제외한 화면 높이 */
       overflow: hidden;
-      background: #fff; /* 흰색 배경 */
-    }
-
-    @media (max-width: 1024px) {
-      .image-wrap {
-        height: calc(var(--vh, 1vh) * 100);
-      }
     }
 
     .image-wrap img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* 이미지 비율 유지하며 전체 보이게 */
+      object-fit: contain;
       display: block;
       user-select: none;
       -webkit-user-drag: none;
+      background: #000;
     }
 
     .box {
@@ -60,6 +55,7 @@
       height: 130%;
     }
 
+    /* 버튼 위치 */
     .box1 {
       top: 44.5%;
       left: 24.5%;
@@ -112,16 +108,5 @@
     <!-- 유튜브 채널 -->
     <a class="box box4" href="https://www.youtube.com/channel/UC-7kl6MvwMtRAx_rIO7pnMQ" target="_blank" rel="noopener" aria-label="유튜브 채널 열기"></a>
   </div>
-
-  <script>
-    function setFullHeight() {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-      document.querySelector('.image-wrap').style.height = `calc(var(--vh, 1vh) * 100)`;
-    }
-
-    window.addEventListener('resize', setFullHeight);
-    window.addEventListener('load', setFullHeight);
-  </script>
 </body>
 </html>
