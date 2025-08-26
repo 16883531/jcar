@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>탁송대리는 역시 제이카!!!</title>
   <style>
-    * { box-sizing: border-box; margin:0; padding:0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     html, body {
       width: 100%;
       height: 100%;
@@ -17,14 +22,21 @@
     .image-wrap {
       position: relative;
       width: 100%;
-      height: 100dvh; /* 모바일 주소창 포함 전체 화면 */
+      height: 100vh; /* 기본값: 데스크톱용 */
       overflow: hidden;
+    }
+
+    /* 모바일에서 100dvh 대신 JS로 정확한 높이 설정 */
+    @media (max-width: 1024px) {
+      .image-wrap {
+        height: calc(var(--vh, 1vh) * 100);
+      }
     }
 
     .image-wrap img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* 화면 꽉 차게, 비율 유지 */
+      object-fit: cover;
       display: block;
       user-select: none;
       -webkit-user-drag: none;
@@ -41,7 +53,6 @@
       cursor: pointer;
     }
 
-    /* 모바일 터치 영역 확대 */
     .box::after {
       content: "";
       position: absolute;
@@ -51,25 +62,38 @@
       height: 130%;
     }
 
-    /* 버튼 아이콘 스타일 */
-   .box1 { 
-      top: 40%; left: 23.5%; width: 21%; height: 12.8%;
+    .box1 {
+      top: 40%;
+      left: 23.5%;
+      width: 21%;
+      height: 12.8%;
       background: url('icon_taksong.png') no-repeat center/contain;
     }
-    .box2 { 
-      top: 40%; left: 55.5%; width: 21%; height: 12.8%;
+
+    .box2 {
+      top: 40%;
+      left: 55.5%;
+      width: 21%;
+      height: 12.8%;
       background: url('icon_daeri.png') no-repeat center/contain;
     }
-    .box3 { 
-      top: 60%; left: 23.5%; width: 21%; height: 12.8%;
+
+    .box3 {
+      top: 60%;
+      left: 23.5%;
+      width: 21%;
+      height: 12.8%;
       background: url('icon_1day.png') no-repeat center/contain;
     }
-    .box4 { 
-      top: 60%; left: 55.5%; width: 21%; height: 12.8%;
+
+    .box4 {
+      top: 60%;
+      left: 55.5%;
+      width: 21%;
+      height: 12.8%;
       background: url('icon_youtube.png') no-repeat center/contain;
     }
 
-    /* 클릭/포커스 시 확대, 점선 투명 처리 */
     .box:active,
     .box:focus {
       transform: scale(1.1);
@@ -93,16 +117,13 @@
 
   <script>
     function setFullHeight() {
-      const vh = window.innerHeight;
-      document.querySelector('.image-wrap').style.height = vh + 'px';
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      document.querySelector('.image-wrap').style.height = `calc(var(--vh, 1vh) * 100)`;
     }
 
-    // 브라우저 로드 및 리사이즈 시 전체 화면 유지
     window.addEventListener('resize', setFullHeight);
     window.addEventListener('load', setFullHeight);
   </script>
 </body>
 </html>
-
-
-
